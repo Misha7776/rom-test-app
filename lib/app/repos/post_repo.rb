@@ -2,7 +2,7 @@
 
 module App
   module Repos
-    class UserRepo < ROM::Repository[:users]
+    class PostRepo < ROM::Repository[:posts]
       include RomTestApp::Import['container']
       struct_namespace App
 
@@ -13,15 +13,7 @@ module App
       }
 
       def all
-        users.to_a
-      end
-
-      def by_email(email)
-        users.where(email: email).as(:entity).one
-      end
-
-      def find(id)
-        users.by_pk(id).as(:entity).one
+        posts.to_a
       end
     end
   end

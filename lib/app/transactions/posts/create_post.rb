@@ -2,11 +2,11 @@
 
 module App
   module Transactions
-    module Users
-      class CreateUser
+    module Posts
+      class CreatePost
         include Dry::Monads[:result]
         include Dry::Monads::Do.for(:call)
-        include RomTestApp::Import['contracts.users.create_user', 'repos.user_repo']
+        include RomTestApp::Import['contracts.posts.create_post', 'repos.post_repo']
 
         def call(input)
           values = yield validate(input)
@@ -16,11 +16,11 @@ module App
         end
 
         def validate(params)
-          create_user.call(params).to_monad
+          create_post.call(params).to_monad
         end
 
         def persist(result)
-          Success(user_repo.create(result.values))
+          Success(post_repo.create(result.values))
         end
       end
     end

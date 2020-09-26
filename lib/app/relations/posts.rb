@@ -2,10 +2,10 @@
 
 module App
   module Relations
-    class Users < ROM::Relation[:sql]
-      schema(:users, infer: true) do
+    class Posts < ROM::Relation[:sql]
+      schema(:posts, infer: true) do
         associations do
-          has_many :posts
+          belongs_to :user
         end
       end
     end

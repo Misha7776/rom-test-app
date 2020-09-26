@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'boot'
+require_relative 'initializers/warden'
 
 require 'dry/system/container'
 require 'dry/auto_inject'
