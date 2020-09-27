@@ -12,8 +12,20 @@ module RequestHelpers
     post path, data.to_json, 'CONTENT_TYPE' => 'application/json'
   end
 
+  def get_json(path, data = {})
+    get path, data.to_json, { 'CONTENT_TYPE' => 'application/json' }
+  end
+
+  def patch_json(path, data = {})
+    patch path, data.to_json, { 'CONTENT_TYPE' => 'application/json' }
+  end
+
   def parsed_body
     JSON.parse(last_response.body)
+  end
+
+  def jwt_token
+    App::Services::JwtIssuer.encode({ user_id: user.id, iss: 'http://localhost:9292' })
   end
 end
 

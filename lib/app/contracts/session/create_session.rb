@@ -6,7 +6,7 @@ module App
       class CreateSession < Dry::Validation::Contract
         params do
           required(:email).filled(:str?, format?: /@/)
-          required(:password).filled(:str?)
+          required(:password_digest).filled(:str?)
         end
       end
     end

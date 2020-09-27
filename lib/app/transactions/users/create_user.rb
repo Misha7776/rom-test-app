@@ -20,7 +20,7 @@ module App
         end
 
         def persist(result)
-          Success(user_repo.create(result.values))
+          Success(user_repo.create(App::Services::Password.encrypt(result.values)))
         end
       end
     end

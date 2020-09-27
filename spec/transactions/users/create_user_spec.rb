@@ -11,8 +11,12 @@ RSpec.describe App::Transactions::Users::CreateUser do
   subject { described_class.new(user_repo: user_repo) }
 
   context 'with valid input' do
-    let(:input) { { first_name: 'Misha', last_name: 'Push', age: 22, email: 'Test@mail.com', password: '12312341' } }
-
+    let(:input) do
+      { first_name: 'Misha', last_name: 'Push',
+        age: 22,
+        email: 'Test@mail.com',
+        password_digest: '12312341' }
+    end
 
     it 'creates a user' do
       expect(user_repo).to receive(:create) { user }

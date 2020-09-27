@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'warden'
 
 class AuthenticationJwtStrategy < ::Warden::Strategies::Base
@@ -16,7 +17,6 @@ class AuthenticationJwtStrategy < ::Warden::Strategies::Base
   end
 
   # Warden checks this to see if the strategy should result in a permanent login
-  #
   def store?
     false
   end
@@ -25,7 +25,7 @@ class AuthenticationJwtStrategy < ::Warden::Strategies::Base
 
   def decoded_token
     token = auth_token_from_headers&.split(' ')&.last # => fetch token: Authorization: 'Bearer <TOKEN>'
-    token && ::JwtIssuer.decode(token)
+    token && App::Services::JwtIssuer.decode(token)
   end
 
   def auth_token_from_headers

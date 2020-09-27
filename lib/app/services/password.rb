@@ -14,10 +14,10 @@ module App
         import :new,    from: BCrypt::Password, as: :new
       end
 
-      def self.encrypt(data, key: :password, cost: cost_factor)
+      def self.encrypt(data, key: :password_digest, cost: cost_factor)
         transformation = t(:map_value, key, t(:generate, cost: cost))
-                           .>> t(:rename_keys, password: :password_digest)
-                                 .>> t(:reject_keys, [:password_confirmation])
+        # .>> t(:rename_keys, password: :password_digest)
+        #       .>> t(:reject_keys, [:password_confirmation])
 
         transformation.call(data)
       end
@@ -31,9 +31,7 @@ module App
       end
 
       def self.cost_factor
-        return 1 if ENV['APP_ENV'] == 'test'
-
-        10
+        1
       end
 
       private

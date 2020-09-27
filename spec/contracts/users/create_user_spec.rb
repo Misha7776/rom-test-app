@@ -11,7 +11,7 @@ RSpec.describe App::Contracts::Users::CreateUser do
       expect(result).to be_failure
       expect(result.errors[:first_name]).to include('is missing')
       expect(result.errors[:email]).to include('is missing')
-      expect(result.errors[:password]).to include('is missing')
+      expect(result.errors[:password_digest]).to include('is missing')
 
     end
   end
@@ -24,12 +24,12 @@ RSpec.describe App::Contracts::Users::CreateUser do
       expect(result).to be_failure
       expect(result.errors[:last_name]).to include('is missing')
       expect(result.errors[:email]).to include('is missing')
-      expect(result.errors[:password]).to include('is missing')
+      expect(result.errors[:password_digest]).to include('is missing')
     end
   end
 
   context 'given valid parameters' do
-    let(:input) { { first_name: 'Misha', last_name: 'Push', age: 32, email: 'test@mail.com', password: 'test' } }
+    let(:input) { { first_name: 'Misha', last_name: 'Push', age: 32, email: 'test@mail.com', password_digest: 'test' } }
     let(:result) { subject.call(input) }
 
     it 'is valid' do

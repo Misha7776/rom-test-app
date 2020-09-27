@@ -17,7 +17,7 @@ module App
                 'Access-Control-Allow-Methods' => %w[GET POST PUT PATCH OPTIONS DELETE].join(','),
                 'Access-Control-Allow-Headers' => %w[Content-Type Accept Auth-Token].join(',')
               },
-              ['Authentication failure']
+              { errors: 'Authentication failure' }.to_json
             ]
           }
         end

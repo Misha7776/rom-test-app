@@ -20,7 +20,7 @@ module App
         end
 
         def persist(params)
-          if find_user(params) && check_password(@user.password_digest, params['password'])
+          if find_user(params) && check_password(@user.password_digest, params['password_digest'])
             Success auth_token: generate_jwt
           else
             Failure password: 'Authentication failure'
@@ -28,7 +28,7 @@ module App
         end
 
         def find_user(params)
-          @user = App::Repos::UserRepo.new.by_email(params['email'])
+          @user = App::Repos::UserRepo.new.find_by(email: params['email'])
         end
 
         def check_password(password_digest, unencrypted_password)
